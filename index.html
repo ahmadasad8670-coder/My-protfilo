@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asad Ahmad | Interactive Portfolio with Games</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            --gradient-soft: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 5px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 16px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Popup */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            z-index: 10000;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .popup.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .popup h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .popup p {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .popup-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .popup-icons a {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3);
+        }
+
+        .popup-icons a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -5px rgba(37, 99, 235, 0.4);
+        }
+
+        .popup-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .popup-btn {
+            flex: 1;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .follow-btn {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .follow-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+        }
+
+        .later-btn {
+            background: transparent;
+            border: 1px solid #e2e8f0;
+            color: var(--dark);
+        }
+
+        .later-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient-soft);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-text {
+            animation: fadeInUp 1s ease;
+        }
+
+        .badge {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .hero-text h1 {
+            font-size: 56px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-text .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -5px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--dark);
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Hero Image */
+        .hero-image {
+            position: relative;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-icon {
+            width: 120px;
+            height: 120px;
+            background: var(--gradient);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            color: white;
+            font-size: 50px;
+            transform: rotate(10deg);
+            transition: 0.3s;
+        }
+
+        .profile-icon:hover {
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        .profile-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .profile-card p {
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 50px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 60px;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+        }
+
+        .section-title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.2);
+            border-color: var(--primary);
+        }
+
+        .about-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 32px;
+            transition: 0.3s;
+        }
+
+        .about-card:hover .about-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .about-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .about-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* ========== GAME SECTION 1: Memory Card Game ========== */
+        .game-section {
+            background: var(--gradient-soft);
+            padding: 80px 50px;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .game-header h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .game-header p {
+            color: var(--gray);
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .memory-card.flipped {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            background: var(--success);
+            color: white;
+            cursor: default;
+            opacity: 0.7;
+        }
+
+        .memory-card:not(.flipped):not(.matched):hover {
+            transform: scale(1.05);
+        }
+
+        .game-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .game-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3);
+        }
+
+        /* ========== GAME SECTION 2: Click Speed Challenge ========== */
+        .click-game {
+            background: white;
+            padding: 80px 50px;
+        }
+
+        .click-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--gradient-soft);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .click-header h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .click-area {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient);
+            border-radius: 20px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .click-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .click-area:hover::before {
+            transform: translateX(100%);
+        }
+
+        .click-area:active {
+            transform: scale(0.95);
+        }
+
+        .click-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .timer-bar {
+            width: 100%;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .timer-progress {
+            height: 100%;
+            background: var(--gradient);
+            width: 100%;
+            transition: width 0.1s linear;
+        }
+
+        /* ========== GAME SECTION 3: Number Guessing Game ========== */
+        .guess-game {
+            background: var(--gradient-soft);
+            padding: 80px 50px;
+        }
+
+        .guess-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .guess-header h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .guess-number {
+            font-size: 80px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .guess-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .guess-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .guess-hint {
+            color: var(--gray);
+            margin: 20px 0;
+            font-size: 18px;
+        }
+
+        .guess-attempts {
+            font-size: 16px;
+            color: var(--gray);
+            margin-top: 20px;
+        }
+
+        /* ========== GAME SECTION 4: Rock Paper Scissors ========== */
+        .rps-game {
+            background: white;
+            padding: 80px 50px;
+        }
+
+        .rps-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--gradient-soft);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .rps-header h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .rps-choices {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .rps-choice {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: var(--primary);
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid var(--primary);
+        }
+
+        .rps-choice:hover {
+            transform: scale(1.1) rotate(10deg);
+            background: var(--gradient);
+            color: white;
+        }
+
+        .rps-result {
+            font-size: 24px;
+            margin: 20px 0;
+            color: var(--primary);
+        }
+
+        .rps-score {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .score-box {
+            text-align: center;
+        }
+
+        .score-box h3 {
+            font-size: 16px;
+            color: var(--gray);
+        }
+
+        .score-box p {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Education Section */
+        .education {
+            background: white;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            transition: 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.2);
+        }
+
+        .timeline-content h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .timeline-content p {
+            color: var(--gray);
+        }
+
+        .timeline-year {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Institute Section */
+        .institute {
+            background: var(--gradient-soft);
+        }
+
+        .institute-card {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .institute-header {
+            background: var(--gradient);
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .institute-header i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 120px;
+            height: 120px;
+            line-height: 120px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .institute-header h3 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .institute-body {
+            padding: 50px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .institute-feature {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .institute-feature i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .institute-feature h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .institute-feature p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Hometown Section */
+        .hometown {
+            background: white;
+        }
+
+        .hometown-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hometown-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .hometown-text p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .hometown-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .feature-item {
+            background: var(--gradient-soft);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2);
+        }
+
+        .feature-item i {
+            font-size: 30px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .feature-item h4 {
+            font-size: 16px;
+        }
+
+        .hometown-image {
+            text-align: center;
+        }
+
+        .hometown-image i {
+            font-size: 250px;
+            color: var(--primary);
+            opacity: 0.5;
+        }
+
+        /* Gaming Section */
+        .gaming {
+            background: var(--gradient-soft);
+        }
+
+        .gaming-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .gaming-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .gaming-text p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .gaming-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .stat-box h3 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-box p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .gaming-image {
+            text-align: center;
+        }
+
+        .gaming-image i {
+            font-size: 180px;
+            color: var(--primary);
+            opacity: 0.8;
+            animation: gameFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes gameFloat {
+            0%, 100% { transform: rotate(-10deg) translateY(0); }
+            50% { transform: rotate(10deg) translateY(-20px); }
+        }
+
+        /* Interview Section */
+        .interview {
+            background: white;
+        }
+
+        .interview-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .interview-card {
+            background: var(--gradient-soft);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .interview-header {
+            background: var(--gradient);
+            padding: 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .interview-header i {
+            font-size: 40px;
+        }
+
+        .interview-header h3 {
+            font-size: 24px;
+        }
+
+        .interview-body {
+            padding: 40px;
+        }
+
+        .qa-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .qa-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .question {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .answer {
+            color: var(--gray);
+            line-height: 1.8;
+            padding-left: 30px;
+        }
+
+        /* Goals Section */
+        .goals {
+            background: var(--gradient-soft);
+        }
+
+        .goals-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .goal-card {
+            background: var(--gradient);
+            padding: 60px;
+            border-radius: 30px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.3);
+        }
+
+        .goal-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 40px;
+        }
+
+        .goal-card h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .goal-card p {
+            font-size: 18px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: var(--gradient-soft);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .skill-card p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--gradient-soft);
+        }
+
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .contact-item:hover {
+            background: var(--gradient-soft);
+            transform: translateX(10px);
+            border-radius: 12px;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .contact-item span {
+            font-size: 16px;
+            color: var(--dark);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .social-links a {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 20px 30px -5px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 50px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-quote {
+            font-size: 18px;
+            margin: 20px 0;
+            color: var(--accent);
+        }
+
+        .footer-location {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            color: var(--gray);
+        }
+
+        .footer-location i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content, .hometown-grid, .gaming-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .timeline::before {
+                display: none;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                gap: 20px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .institute-body {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-game {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 80px 20px;
+            }
+
+            .hero-text h1 {
+                font-size: 40px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .gaming-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .popup-buttons {
+                flex-direction: column;
+            }
+
+            .hometown-features {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-game {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Loading Animation */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.5s;
+        }
+
+        .loader {
+            text-align: center;
+        }
+
+        .loader i {
+            font-size: 50px;
+            color: var(--primary);
+            animation: loaderSpin 2s linear infinite;
+        }
+
+        @keyframes loaderSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader h2 {
+            margin-top: 20px;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader">
+            <i class="fas fa-mosque"></i>
+            <h2>Asad Ahmad</h2>
+            <p>Bara, Ghazipur</p>
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup" id="followPopup">
+        <h2>Connect with Asad</h2>
+        <p>Play games, learn coding, and follow my journey!</p>
+        
+        <div class="popup-icons">
+            <a href="https://instagram.com/_a4asd__" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/918115619317" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+
+        <div class="popup-buttons">
+            <button class="popup-btn follow-btn" onclick="followNow()">Follow Now</button>
+            <button class="popup-btn later-btn" onclick="closePopup()">Later</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Asad Ahmad</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#institute">Institute</a>
+            <a href="#games">Play Games</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="badge">🎮 Play Games • 📚 Learn • 🚀 Grow</div>
+                <h1>Asad Ahmad<br><span class="highlight">from Bara, Ghazipur</span></h1>
+                <p>A dedicated student at Jamia Salafiyah who loves coding, gaming with friends, and creating fun interactive experiences. Play the games below to know me better!</p>
+                <div class="hero-buttons">
+                    <a href="#games" class="btn btn-primary"><i class="fas fa-gamepad"></i> Play Games</a>
+                    <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Connect</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-card">
+                    <div class="profile-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Asad Ahmad</h3>
+                    <p>📍 Bara, Ghazipur</p>
+                    <p>🎓 Jamia Salafiyah</p>
+                    <p>🎮 Game Developer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">About <span>Me</span></h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="about-icon"><i class="fas fa-user-graduate"></i></div>
+                <h3>The Student</h3>
+                <p>Consistently top performer from Class 1-10 at Jamia Salafiyah. Discipline and respect for teachers define my journey.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>The Developer</h3>
+                <p>Self-taught web developer creating interactive games and websites. I love making fun experiences with code.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon"><i class="fas fa-gamepad"></i></div>
+                <h3>The Gamer</h3>
+                <p>Free Fire with friends on weekends. Gaming teaches strategy, teamwork, and quick thinking - skills I use in coding too!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== GAMES SECTION ========== -->
+    <section class="game-section" id="games">
+        <h2 class="section-title">Play <span>Games</span></h2>
+        
+        <!-- Game 1: Memory Card Game -->
+        <div class="game-container">
+            <div class="game-header">
+                <h2>🎴 Memory Card Game</h2>
+                <p>Test your memory! Match the pairs to win.</p>
+            </div>
+            
+            <div class="game-stats">
+                <div class="stat">
+                    <div class="stat-label">Moves</div>
+                    <div class="stat-value" id="moves">0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Matches</div>
+                    <div class="stat-value" id="matches">0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Best Score</div>
+                    <div class="stat-value" id="bestScore">0</div>
+                </div>
+            </div>
+            
+            <div class="memory-game" id="memoryGame">
+                <!-- Cards will be generated by JavaScript -->
+            </div>
+            
+            <button class="game-btn" onclick="resetMemoryGame()">New Game</button>
+        </div>
+    </section>
+
+    <!-- Game 2: Click Speed Challenge -->
+    <section class="click-game">
+        <div class="click-container">
+            <div class="click-header">
+                <h2>⚡ Click Speed Challenge</h2>
+                <p>How fast can you click in 10 seconds?</p>
+            </div>
+            
+            <div class="click-stats">
+                <div class="stat">
+                    <div class="stat-label">Clicks</div>
+                    <div class="stat-value" id="clickCount">0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Time</div>
+                    <div class="stat-value" id="timeLeft">10s</div>
+                </div>
+            </div>
+            
+            <div class="click-area" id="clickArea" onclick="handleClick()">
+                CLICK HERE!
+            </div>
+            
+            <div class="timer-bar">
+                <div class="timer-progress" id="timerProgress" style="width: 100%"></div>
+            </div>
+            
+            <button class="game-btn" onclick="resetClickGame()">Start New Game</button>
+            <p id="clickMessage" style="margin-top: 20px; color: var(--gray);"></p>
+        </div>
+    </section>
+
+    <!-- Game 3: Number Guessing Game -->
+    <section class="guess-game">
+        <div class="guess-container">
+            <div class="guess-header">
+                <h2>🔢 Number Guessing</h2>
+                <p>Guess the number between 1-100</p>
+            </div>
+            
+            <div class="guess-number" id="guessIcon">❓</div>
+            
+            <input type="number" class="guess-input" id="guessInput" placeholder="Enter your guess" min="1" max="100">
+            
+            <button class="game-btn" onclick="makeGuess()">Submit Guess</button>
+            
+            <div class="guess-hint" id="guessHint">I'm thinking of a number...</div>
+            <div class="guess-attempts" id="guessAttempts">Attempts: 0</div>
+            
+            <button class="game-btn" onclick="resetGuessGame()" style="margin-top: 20px; background: var(--gray);">New Game</button>
+        </div>
+    </section>
+
+    <!-- Game 4: Rock Paper Scissors -->
+    <section class="rps-game">
+        <div class="rps-container">
+            <div class="rps-header">
+                <h2>✊ Rock Paper Scissors</h2>
+                <p>Play against the computer!</p>
+            </div>
+            
+            <div class="rps-choices">
+                <div class="rps-choice" onclick="playRPS('rock')">
+                    <i class="fas fa-hand-rock"></i>
+                </div>
+                <div class="rps-choice" onclick="playRPS('paper')">
+                    <i class="fas fa-hand-paper"></i>
+                </div>
+                <div class="rps-choice" onclick="playRPS('scissors')">
+                    <i class="fas fa-hand-scissors"></i>
+                </div>
+            </div>
+            
+            <div class="rps-result" id="rpsResult">Choose your move!</div>
+            
+            <div class="rps-score">
+                <div class="score-box">
+                    <h3>You</h3>
+                    <p id="playerScore">0</p>
+                </div>
+                <div class="score-box">
+                    <h3>Computer</h3>
+                    <p id="computerScore">0</p>
+                </div>
+            </div>
+            
+            <button class="game-btn" onclick="resetRPS()" style="margin-top: 20px;">Reset Score</button>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education" id="education">
+        <h2 class="section-title">Education <span>Journey</span></h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>Primary & Secondary Education</h4>
+                    <p>Class 1-10 with consistent top performance at Jamia Salafiyah. Built a strong foundation in academics and discipline.</p>
+                </div>
+                <div class="timeline-year">2014-2024</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>Higher Education</h4>
+                    <p>Currently studying at Jamia Salafiyah, Varanasi. Pursuing Islamic and modern education with focus on web development.</p>
+                </div>
+                <div class="timeline-year">2024-Present</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Institute Section -->
+    <section class="institute" id="institute">
+        <h2 class="section-title">Jamia <span>Salafiyah</span></h2>
+        <div class="institute-card">
+            <div class="institute-header">
+                <i class="fas fa-university"></i>
+                <h3>Jamia Salafiyah</h3>
+                <p>Varanasi - A Premier Islamic Institution</p>
+            </div>
+            <div class="institute-body">
+                <div class="institute-feature">
+                    <i class="fas fa-quran"></i>
+                    <h4>Islamic Studies</h4>
+                    <p>Comprehensive Islamic education and Quranic studies</p>
+                </div>
+                <div class="institute-feature">
+                    <i class="fas fa-language"></i>
+                    <h4>Arabic Language</h4>
+                    <p>In-depth Arabic language and literature</p>
+                </div>
+                <div class="institute-feature">
+                    <i class="fas fa-users"></i>
+                    <h4>Character Building</h4>
+                    <p>Focus on discipline, ethics, and personal development</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hometown Section -->
+    <section class="hometown" id="hometown">
+        <h2 class="section-title">My <span>Hometown</span></h2>
+        <div class="hometown-grid">
+            <div class="hometown-text">
+                <h2>Bara, Ghazipur</h2>
+                <p>I come from Bara, a peaceful town in Ghazipur district, Eastern Uttar Pradesh. Known for its agricultural heritage, hardworking community, and rich cultural traditions. Growing up here taught me values of dedication, simplicity, and perseverance.</p>
+                
+                <div class="hometown-features">
+                    <div class="feature-item">
+                        <i class="fas fa-history"></i>
+                        <h4>Historical</h4>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-tractor"></i>
+                        <h4>Agriculture</h4>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-handshake"></i>
+                        <h4>Hardworking</h4>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-peace"></i>
+                        <h4>Peaceful</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="hometown-image">
+                <i class="fas fa-map-marked-alt"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gaming Section -->
+    <section class="gaming" id="gaming">
+        <h2 class="section-title">Gaming <span>Life</span></h2>
+        <div class="gaming-container">
+            <div class="gaming-text">
+                <h2>Free Fire with Friends</h2>
+                <p>Yes, I play Free Fire with my friends on weekends! It's a great way to unwind and bond. Gaming teaches teamwork, quick decision-making, and strategic thinking - skills that help in coding too.</p>
+                <p>Balance is key - studies always come first, but gaming with friends keeps life enjoyable. Try the games I built above!</p>
+                
+                <div class="gaming-stats">
+                    <div class="stat-box">
+                        <h3>Weekends</h3>
+                        <p>Gaming Time</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>👥 4-5</h3>
+                        <p>Friends Squad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gaming-image">
+                <i class="fas fa-gamepad"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interview Section -->
+    <section class="interview" id="interview">
+        <h2 class="section-title">Interview <span>Highlights</span></h2>
+        <div class="interview-container">
+            <div class="interview-card">
+                <div class="interview-header">
+                    <i class="fas fa-microphone-alt"></i>
+                    <h3>Conversation with Asad</h3>
+                </div>
+                <div class="interview-body">
+                    <div class="qa-item">
+                        <div class="question"><i class="fas fa-question-circle"></i> Tell me about yourself.</div>
+                        <div class="answer">My name is Asad Ahmad from Bara, Ghazipur. I'm studying at Jamia Salafiyah, Varanasi. I love coding, gaming with friends, and creating interactive experiences.</div>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <div class="question"><i class="fas fa-question-circle"></i> About your education?</div>
+                        <div class="answer">From Class 1 to 10, I've been a top performer at Jamia Salafiyah. Discipline and regular study are my keys to success.</div>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <div class="question"><i class="fas fa-question-circle"></i> About Jamia Salafiyah?</div>
+                        <div class="answer">Jamia Salafiyah in Varanasi is a prestigious Islamic institution. It provides excellent Islamic and modern education with focus on character development.</div>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <div class="question"><i class="fas fa-question-circle"></i> Free time activities?</div>
+                        <div class="answer">I enjoy coding games, playing Free Fire with friends, and learning new technologies. Gaming is fun but studies come first!</div>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <div class="question"><i class="fas fa-question-circle"></i> Your hometown?</div>
+                        <div class="answer">Bara in Ghazipur - a historical district in Eastern UP known for agriculture and hardworking people. The peaceful environment shaped my values.</div>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <div class="question"><i class="fas fa-question-circle"></i> Future goals?</div>
+                        <div class="answer">To become a skilled developer, create amazing games and websites, and make my family proud. I want to combine traditional knowledge with modern technology.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Goals Section -->
+    <section class="goals" id="goals">
+        <h2 class="section-title">Future <span>Aspirations</span></h2>
+        <div class="goals-container">
+            <div class="goal-card">
+                <div class="goal-icon"><i class="fas fa-star"></i></div>
+                <h3>My Vision</h3>
+                <p>"To become a skilled developer creating fun games and useful websites, while excelling in my studies at Jamia Salafiyah. I want to inspire others to learn coding through games!"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="section-title">Technical <span>Skills</span></h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></div>
+                <h3>HTML & CSS</h3>
+                <p>Semantic HTML, Flexbox, Grid, Animations, Responsive Design</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-js"></i></div>
+                <h3>JavaScript</h3>
+                <p>DOM Manipulation, ES6+, Game Logic, Interactive Features</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-react"></i></div>
+                <h3>React.js</h3>
+                <p>Components, Hooks, State Management, Building Interactive UIs</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fas fa-gamepad"></i></div>
+                <h3>Game Development</h3>
+                <p>Memory Games, Click Games, Logic Puzzles, Browser Games</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get In <span>Touch</span></h2>
+        <div class="contact-container">
+            <div class="contact-card">
+                <div class="contact-item">
+                    <i class="fas fa-user"></i>
+                    <span>Asad Ahmad</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Bara, Ghazipur, Uttar Pradesh, India</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-university"></i>
+                    <span>Jamia Salafiyah, Varanasi</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>asadahmad9596@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>+91 8115619317</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <span>@_a4asd__</span>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://instagram.com/_a4asd__" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/918115619317" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:asadahmad9596@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2024 Asad Ahmad from Bara, Ghazipur</p>
+            <p class="footer-quote">"Coding is fun, Gaming is fun, Learning is forever!"</p>
+            <div class="footer-location">
+                <span><i class="fas fa-map-marker-alt"></i> Bara, Ghazipur</span>
+                <span><i class="fas fa-university"></i> Jamia Salafiyah</span>
+                <span><i class="fas fa-code"></i> Game Developer</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Popup
+        setTimeout(function() {
+            document.getElementById('followPopup').classList.add('show');
+        }, 3000);
+
+        function followNow() {
+            window.open('https://instagram.com/_a4asd__', '_blank');
+            closePopup();
+        }
+
+        function closePopup() {
+            document.getElementById('followPopup').classList.remove('show');
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar Background Change on Scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.05)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.8)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // ========== GAME 1: Memory Card Game ==========
+        const memoryCards = [
+            '🐶', '🐱', '🐭', '🐹',
+            '🐰', '🦊', '🐻', '🐼',
+            '🐶', '🐱', '🐭', '🐹',
+            '🐰', '🦊', '🐻', '🐼'
+        ];
+        
+        let memoryGameCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let moves = 0;
+        let canFlip = true;
+        
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function initMemoryGame() {
+            memoryGameCards = shuffleArray([...memoryCards]);
+            const gameBoard = document.getElementById('memoryGame');
+            gameBoard.innerHTML = '';
+            
+            memoryGameCards.forEach((card, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'memory-card';
+                cardElement.setAttribute('data-index', index);
+                cardElement.setAttribute('data-value', card);
+                cardElement.onclick = () => flipCard(index);
+                cardElement.innerHTML = '❓';
+                gameBoard.appendChild(cardElement);
+            });
+            
+            flippedCards = [];
+            matchedPairs = 0;
+            moves = 0;
+            canFlip = true;
+            updateMemoryStats();
+            
+            // Load best score from localStorage
+            const bestScore = localStorage.getItem('memoryBestScore') || 0;
+            document.getElementById('bestScore').textContent = bestScore;
+        }
+        
+        function flipCard(index) {
+            if (!canFlip) return;
+            
+            const card = document.querySelector(`[data-index="${index}"]`);
+            
+            if (card.classList.contains('matched') || card.classList.contains('flipped')) return;
+            if (flippedCards.length === 2) return;
+            
+            card.classList.add('flipped');
+            card.innerHTML = card.getAttribute('data-value');
+            flippedCards.push(index);
+            
+            if (flippedCards.length === 2) {
+                moves++;
+                updateMemoryStats();
+                checkMatch();
+            }
+        }
+        
+        function checkMatch() {
+            const card1 = document.querySelector(`[data-index="${flippedCards[0]}"]`);
+            const card2 = document.querySelector(`[data-index="${flippedCards[1]}"]`);
+            
+            if (card1.getAttribute('data-value') === card2.getAttribute('data-value')) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+                updateMemoryStats();
+                flippedCards = [];
+                
+                if (matchedPairs === 8) {
+                    setTimeout(() => {
+                        alert('🎉 Congratulations! You won!');
+                        const bestScore = localStorage.getItem('memoryBestScore') || Infinity;
+                        if (moves < bestScore) {
+                            localStorage.setItem('memoryBestScore', moves);
+                            document.getElementById('bestScore').textContent = moves;
+                        }
+                    }, 500);
+                }
+            } else {
+                canFlip = false;
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    card1.innerHTML = '❓';
+                    card2.innerHTML = '❓';
+                    flippedCards = [];
+                    canFlip = true;
+                }, 1000);
+            }
+        }
+        
+        function updateMemoryStats() {
+            document.getElementById('moves').textContent = moves;
+            document.getElementById('matches').textContent = matchedPairs;
+        }
+        
+        function resetMemoryGame() {
+            initMemoryGame();
+        }
+        
+        // ========== GAME 2: Click Speed Challenge ==========
+        let clickCount = 0;
+        let timeLeft = 10;
+        let clickGameActive = false;
+        let clickTimer = null;
+        
+        function handleClick() {
+            if (!clickGameActive) {
+                startClickGame();
+            } else {
+                clickCount++;
+                document.getElementById('clickCount').textContent = clickCount;
+            }
+        }
+        
+        function startClickGame() {
+            clickCount = 0;
+            timeLeft = 10;
+            clickGameActive = true;
+            document.getElementById('clickCount').textContent = '0';
+            document.getElementById('timeLeft').textContent = timeLeft + 's';
+            document.getElementById('timerProgress').style.width = '100%';
+            document.getElementById('clickMessage').textContent = 'Keep clicking!';
+            
+            if (clickTimer) clearInterval(clickTimer);
+            
+            clickTimer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timeLeft').textContent = timeLeft + 's';
+                document.getElementById('timerProgress').style.width = (timeLeft * 10) + '%';
+                
+                if (timeLeft <= 0) {
+                    endClickGame();
+                }
+            }, 1000);
+        }
+        
+        function endClickGame() {
+            clickGameActive = false;
+            clearInterval(clickTimer);
+            const cps = (clickCount / 10).toFixed(2);
+            document.getElementById('clickMessage').innerHTML = `Game Over! You clicked ${clickCount} times (${cps} clicks/sec)`;
+            
+            // Save high score
+            const highScore = localStorage.getItem('clickHighScore') || 0;
+            if (clickCount > highScore) {
+                localStorage.setItem('clickHighScore', clickCount);
+                document.getElementById('clickMessage').innerHTML += '<br>🎉 New High Score!';
+            }
+        }
+        
+        function resetClickGame() {
+            if (clickTimer) clearInterval(clickTimer);
+            clickGameActive = false;
+            clickCount = 0;
+            timeLeft = 10;
+            document.getElementById('clickCount').textContent = '0';
+            document.getElementById('timeLeft').textContent = '10s';
+            document.getElementById('timerProgress').style.width = '100%';
+            document.getElementById('clickMessage').textContent = 'Click the button to start!';
+        }
+        
+        // ========== GAME 3: Number Guessing Game ==========
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let guessAttempts = 0;
+        
+        function makeGuess() {
+            const guess = parseInt(document.getElementById('guessInput').value);
+            
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                document.getElementById('guessHint').textContent = '⚠️ Please enter a number between 1-100';
+                return;
+            }
+            
+            guessAttempts++;
+            document.getElementById('guessAttempts').textContent = `Attempts: ${guessAttempts}`;
+            
+            if (guess === secretNumber) {
+                document.getElementById('guessHint').innerHTML = '🎉 Correct! You got it!';
+                document.getElementById('guessIcon').textContent = '🎯';
+                
+                // Save score
+                const bestGuess = localStorage.getItem('bestGuess') || Infinity;
+                if (guessAttempts < bestGuess) {
+                    localStorage.setItem('bestGuess', guessAttempts);
+                    document.getElementById('guessHint').innerHTML += '<br>🏆 New Record!';
+                }
+            } else if (guess < secretNumber) {
+                document.getElementById('guessHint').textContent = '📈 Too low! Try higher.';
+                document.getElementById('guessIcon').textContent = '⬆️';
+            } else {
+                document.getElementById('guessHint').textContent = '📉 Too high! Try lower.';
+                document.getElementById('guessIcon').textContent = '⬇️';
+            }
+            
+            document.getElementById('guessInput').value = '';
+        }
+        
+        function resetGuessGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            guessAttempts = 0;
+            document.getElementById('guessAttempts').textContent = 'Attempts: 0';
+            document.getElementById('guessHint').textContent = 'New game! Guess the number...';
+            document.getElementById('guessIcon').textContent = '❓';
+            document.getElementById('guessInput').value = '';
+        }
+        
+        // ========== GAME 4: Rock Paper Scissors ==========
+        let playerScore = 0;
+        let computerScore = 0;
+        
+        function playRPS(playerChoice) {
+            const choices = ['rock', 'paper', 'scissors'];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            
+            let result = '';
+            
+            if (playerChoice === computerChoice) {
+                result = "🤝 It's a tie!";
+            } else if (
+                (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                (playerChoice === 'paper' && computerChoice === 'rock') ||
+                (playerChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                result = '🎉 You win!';
+                playerScore++;
+            } else {
+                result = '💻 Computer wins!';
+                computerScore++;
+            }
+            
+            document.getElementById('rpsResult').innerHTML = 
+                `You chose ${playerChoice} 🤜, Computer chose ${computerChoice} 🤖<br>${result}`;
+            
+            document.getElementById('playerScore').textContent = playerScore;
+            document.getElementById('computerScore').textContent = computerScore;
+        }
+        
+        function resetRPS() {
+            playerScore = 0;
+            computerScore = 0;
+            document.getElementById('playerScore').textContent = '0';
+            document.getElementById('computerScore').textContent = '0';
+            document.getElementById('rpsResult').textContent = 'Choose your move!';
+        }
+        
+        // Initialize games on page load
+        window.onload = function() {
+            initMemoryGame();
+            resetClickGame();
+            resetGuessGame();
+            resetRPS();
+        };
+    </script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
